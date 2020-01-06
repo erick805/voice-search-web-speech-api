@@ -42,6 +42,12 @@ if (SpeechRecognition) {
     micIcon.classList.add("fa-microphone");
     console.log("Speech Recognition Disconnected");
   }
+
+  recognition.addEventListener("result", resultOfSpeechRecognition);
+
+  function resultOfSpeechRecognition(event) {
+    console.log(event);
+  }
 } else {
   console.log("Your Browser does not support speech recognition");
 }
