@@ -51,6 +51,9 @@ if (SpeechRecognition) {
   function resultOfSpeechRecognition(event) {
     const transcript = event.results[0][0].transcript;
     searchFormInput.value = transcript;
+    setTimeout(() => {
+      searchForm.submit();
+    }, 625);
   }
 } else {
   console.log("Your Browser does not support speech recognition");
