@@ -17,6 +17,7 @@ if (SpeechRecognition) {
 
   const recognition = new SpeechRecognition();
   // recognition.continuous = true;
+  recognition.lang = "zh-HK";
 
   micBtn.addEventListener("click", micBtnClick);
 
