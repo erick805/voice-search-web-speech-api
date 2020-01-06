@@ -16,7 +16,7 @@ if (SpeechRecognition) {
   const micIcon = micBtn.querySelector("i");
 
   const recognition = new SpeechRecognition();
-  recognition.continuous = true;
+  // recognition.continuous = true;
 
   micBtn.addEventListener("click", micBtnClick);
 
@@ -35,19 +35,22 @@ if (SpeechRecognition) {
   function startSpeechRecognition() {
     micIcon.classList.remove("fa-microphone");
     micIcon.classList.add("fa-microphone-slash");
+    searchFormInput.focus();
     console.log("Speech Recognition Active");
   }
   recognition.addEventListener("end", endSpeechRecognition);
   function endSpeechRecognition() {
     micIcon.classList.remove("fa-microphone-slash");
     micIcon.classList.add("fa-microphone");
+    searchFormInput.focus();
     console.log("Speech Recognition Disconnected");
   }
 
   recognition.addEventListener("result", resultOfSpeechRecognition);
 
   function resultOfSpeechRecognition(event) {
-    console.log(event);
+    const transcript = event.results[0][0].transcript;
+    searchFormInput.value = transcript;
   }
 } else {
   console.log("Your Browser does not support speech recognition");
