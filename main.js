@@ -16,6 +16,7 @@ if (SpeechRecognition) {
   const micIcon = micBtn.querySelector("i");
 
   const recognition = new SpeechRecognition();
+  recognition.continuous = true;
 
   micBtn.addEventListener("click", micBtnClick);
 
