@@ -16,8 +16,8 @@ if (SpeechRecognition) {
   const micIcon = micBtn.querySelector("i");
 
   const recognition = new SpeechRecognition();
-  // recognition.continuous = true;
-  recognition.lang = "zh-HK";
+  recognition.continuous = true;
+  // recognition.lang = "zh-HK";
 
   micBtn.addEventListener("click", micBtnClick);
 
@@ -50,11 +50,25 @@ if (SpeechRecognition) {
   recognition.addEventListener("result", resultOfSpeechRecognition);
 
   function resultOfSpeechRecognition(event) {
-    const transcript = event.results[0][0].transcript;
-    searchFormInput.value = transcript;
-    setTimeout(() => {
-      searchForm.submit();
-    }, 625);
+    const currentResultIndex = event.resultIndex;
+    const transcript = event.results[currentResultIndex][0].transcript;
+
+    if (transcript.toLowerCase().trim() === "stop recording") {
+      recognition.stop();
+    } else if (!searchFormInput.value) {
+      searchFormInput.value = transcript;
+    } else {
+      if (transcript.toLowerCase().trim() === "go") {
+        searchForm.submit();
+      } else if (transcript.toLowerCase().trim() === "reset input") {
+        searchFormInput.value = "";
+      } else {
+        searchFormInput.value = transcript;
+      }
+    }
+    // setTimeout(() => {
+    //   searchForm.submit();
+    // }, 625);
   }
 } else {
   console.log("Your Browser does not support speech recognition");
